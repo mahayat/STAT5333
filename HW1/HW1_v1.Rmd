@@ -1,0 +1,49 @@
+---
+title: "Homework 1"
+subtitle: "STAT 5333 (Spring 2021)"
+author: "Md Abul Hayat"
+output: pdf_document
+---
+
+## Problem 1.2
+(a) Nominal (b) Ordinal (c) Ordinal (d) Nominal (e) Nominal (f) Ordinal
+
+## Problem 1.4
+(a) Probability mass function, $P(Y=y) = \frac{n!}{y!(n-y)!}\pi^y (1-\pi)^{n-y}$. Here, $\pi = 0.5$ and $n=2$
+```{r}
+p = 0.5
+n = 2
+dbinom(0:n,n,p)
+```
+Also, mean, $\mu = n\pi = 2\times0.5 = 1$ and standard deviation, $\sigma = \sqrt{ n\pi(1-\pi)} = \frac{1}{\sqrt{2}}$
+
+(b) 
+```{r}
+p = 0.6
+dbinom(0:n,n,p)
+p = 0.4
+dbinom(0:n,n,p)
+```
+(c) Likelihood function, $L(\pi) = P(Y=1|\pi) = \frac{2!}{1!1!}\pi^1 (1-\pi)^1 = 2\pi(1-\pi)$
+```{r}
+p = seq(0,1,0.01)
+L = 2*p*(1-p)
+plot(p,L,type="l", col="red", xlab="Probability", ylab="Likelihood")
+abline(v=0.5, col="blue", lty = 2)
+abline(h=0.5, col="blue", lty = 2)
+grid()
+```
+(d) The maximum value of $L(\pi)$ is $0.5$ at $\pi=0.5$, which is the ML estimate. 
+
+## Problem 1.6
+(a) Here, $n = n_1+n_2+n_3$. Hence, $n_3=n-n_1-n_2$ if we know $n_1$ and $n_2$. 
+(b) All (=10=$\frac{5!}{2!3!}$) possible observations $(n_1,n_2,n_3)$ with $n = 3$ are (0,0,3), (0,1,2), (0,2,1), (0,3,0), (1,0,2), (1,1,1), (1,2,0), (2,0,1), (2,1,0), (3,0,0)
+
+(c) Multinomial probability of $(n_1,n_2,n_3) = (1, 2, 0)$ with $(\pi_1,\pi_2,\pi_3) = (0.25, 0.50, 0.25)$ is
+```{r}
+dmultinom(x=c(1,2,0),prob=c(0.25,0.5,0.25))
+```
+
+(d) $n_1$ has binomial distribution with $n_1 \sim Bin(n, \pi_1)$.
+$$P(n_1 = k) = \frac{n!}{k!(n-k)!}\pi_1^k(1-\pi_1)^{n-k} = \frac{n!}{k!(n-k)!}\pi_1^k(\pi_2 + \pi_3)^{n_2+n_3}$$
+
