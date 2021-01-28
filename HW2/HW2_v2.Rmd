@@ -1,0 +1,32 @@
+---
+title: "Homework 2"
+subtitle: "STAT 5333 (Spring 2021)"
+author: "Md Abul Hayat"
+output: pdf_document
+---
+
+## Problem 2.2
+Here, $X=$ true status (1 = disease, 2 = no disease), $Y=$ diagnosis (1 = positive, 2 = negative) and $\pi_i = P(Y=1|X=i) \quad \forall i \in \{1,2\}$ 
+
+(a) Sensitivity = True Positive Rate = $P(Y=1|X=1)$ = $\pi_1$.\
+Specificity = True Negative Rate = $P(Y=2|X=2)$ = $1-P(Y=1|X=2)$ = $1-\pi_2$
+
+(b) Here, $P(X=1)=\gamma$ 
+$$P(X=1|Y=1) = \frac{P(Y=1|X=1)P(X=1)}{P(Y=1|X=1)P(X=1)+P(Y=1|X=2)P(X=2)} = \frac{\gamma \pi_1}{\gamma \pi_1+\pi_2 (1-\gamma)}$$
+
+(c) Here, $\gamma = 0.01$, $\pi_1 = 0.86$ and $\pi_2=1-$Specificity = $1-0.88 = 0.12$. The pobability of truely having cancer given positive test result is
+```{r}
+p1 = 0.86; p2 = 1-0.88; gamma = 0.01
+((gamma*p1)/((gamma*p1)+p2*(1-gamma)))
+```
+## Problem 2.10
+Let, $X=$ race of murderer (1 = black, 2 = white) and $Y=$ race of victim (1 = black, 2 = white)
+
+(a) The conditional distributions refer to $X|Y$. Here, $P(X=1|Y=1)=0.91$ and $P(X=2|Y=2)=0.83$
+
+(b) Odds Ratio, $$\theta = \frac{P(X=1,Y=1)}{P(X=1,Y=2)} \frac{P(X=2,Y=2)}{P(X=2,Y=1)} =\frac{P(X=1|Y=1)}{P(X=1|Y=2)} \frac{P(X=2|Y=2)}{P(X=2|Y=1)} = \frac{0.91}{1-0.83} \frac{0.83}{1-0.91} = \boxed{49.36}$$
+Hence, the odds of a black man killed by a black murderer is 49.36 times higher than odds of being killed by a white murderer.
+
+(c) The probability that the victim was white, given that a murderer was white 
+$$P(Y=2|X=2)=\frac{P(X=2|Y=2)P(Y=2)}{P(X=2|Y=1)P(Y=1)+P(X=2|Y=2)P(Y=2)}=\frac{0.83\times P(Y=2)}{0.09 \times P(Y=1)+0.83 \times P(Y=2)}$$ So, we need either $P(Y=1)$ or $P(Y=2)$ to find the probability above. 
+
