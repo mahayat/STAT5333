@@ -1,0 +1,70 @@
+---
+title: "Homework 3"
+subtitle: "STAT 5333 (Spring 2021)"
+author: "Md Abul Hayat"
+output: pdf_document
+---
+
+## Problem 2.22 (a)
+
+Diagnosis | Drugs | No Drugs | Row Sum |
+----------|-------:|---------:|-------:|
+Schizophrenia | 105 | 8 | 113 |
+Affective Disorder | 12 | 2 | 14 |
+Neurosis | 18 | 19 | 37 |
+Personality Disorder | 47 | 52 | 99 |
+Special Symptoms | 0 | 13 | 13 |
+Column Sum | 182 | 94 | 276 |
+
+```{r}
+# General Code
+n_table= matrix(c(105,8,12,2,18,19,47,52,0,13), nrow=5, byrow=TRUE)
+n_rows = dim(n_table)[1]
+n_cols = dim(n_table)[2]
+```
+Finding $\{\hat{\mu}_{i,j}\}$
+```{r}
+mu_table = matrix(rep(0,n_rows*n_cols), nrow=n_rows, byrow=TRUE)
+for (i in 1:n_rows){
+  for (j in 1:n_cols){
+    mu_table[i,j]=(sum(n_table[i,])*sum(n_table[,j]))/sum(n_table) 
+  }
+}
+(mu_table)
+```
+
+Pearsons $\chi^2_{I-1,J-1}$ test statistic for $(I\times J)$ table
+$$\chi^2_{I-1,J-1} = \sum_{i=1}^{I} \sum_{j=1}^{J} \frac{(n_{ij}-\hat{\mu}_{ij})^2}{\hat{\mu}_{ij}}$$
+```{r}
+chi2_stat = sum((n_table-mu_table)^2/mu_table)
+(chi2_stat)
+```
+p-value of test statistic
+```{r}
+df = (n_rows-1)*(n_cols-1)
+p_value = 1-pchisq(chi2_stat,df)
+(p_value)
+```
+There is significant evidence against $H_0$ hypothesis. Hence, drugs are \textit{not} being prescribed irrespective of disease. 
+
+## Problem 2.30
+
+Treatment | Cancer Controlled | Cancer Not Controlled | Row Sum |
+----------|:-------:|:---------:|:-------:|
+Surgery | 21 | 2 | 23 |
+Radiation Therapy | 15 | 3 | 18 |
+Column Sum | 36 | 5 | 41 |
+
+Here, $H_0$: $\theta = 1$ and $H_\alpha$: $\theta > 1$
+
+```{r}
+(phyper(20,36,5,23))
+```
+
+
+```{r}
+data = matrix(c(21,2,15,3),2,2,byrow=TRUE)
+fisher.test(data,'greater')
+```
+
+
