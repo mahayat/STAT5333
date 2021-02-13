@@ -45,7 +45,11 @@ df = (n_rows-1)*(n_cols-1)
 p_value = 1-pchisq(chi2_stat,df)
 (p_value)
 ```
-There is significant evidence against $H_0$ hypothesis. Hence, drugs are \textit{not} being prescribed irrespective of disease. 
+There is significant evidence against $H_0$ hypothesis. Hence, drugs are \textit{not} being prescribed independent of diseases. The exact same results can be obtained using built-in function of R
+```{r}
+(builtin_func = chisq.test(n_table))
+builtin_func$expected
+```
 
 ## Problem 2.30
 
@@ -58,13 +62,13 @@ Column Sum | 36 | 5 | 41 |
 Here, $H_0$: $\theta = 1$ and $H_\alpha$: $\theta > 1$
 
 ```{r}
-(phyper(20,36,5,23))
+(p_value = 1-phyper(20,23,18,36))
 ```
-
+As $\text{p-value}= 0.3808337 > 0.05$, we do not have significant evidence against $H_0$. Hence, controlling cancer is independent of treatment. The same results are obtained using built-in function
 
 ```{r}
 data = matrix(c(21,2,15,3),2,2,byrow=TRUE)
-fisher.test(data,'greater')
+fisher.test(data,alternative = "greater")
 ```
 
 
