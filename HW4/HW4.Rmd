@@ -1,0 +1,23 @@
+---
+title: "Homework 4"
+subtitle: "STAT 5333 (Spring 2021)"
+author: "Md Abul Hayat"
+output: pdf_document
+---
+
+## Problem 4.3
+(a) Here, ML fit of linear probability model is $\hat{\pi} = 0.7578-0.0694x$ which means that after each decade "the percentage of times the starting pitcher pitched a complete game" decreases by a factor of 0.0694.
+
+(b) 
+```{r}
+(0.7578-0.0694*12)
+```
+Persentage cannot be negative, hence it is not plausible.
+
+(c) Here, ML fit of logistic regression model is $$\hat{\pi} =\frac{e^{1.148-0.315x}}{1+e^{1.148-0.315x}}$$
+```{r}
+x = 12
+exp(1.148-0.315*x)/(1+exp(1.148-0.315*x))
+```
+This is plausible because $\hat{\pi}$ is always between $[0, 1]$.
+
